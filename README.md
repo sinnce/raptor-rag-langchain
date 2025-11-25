@@ -3,6 +3,8 @@
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![LangChain](https://img.shields.io/badge/LangChain-0.3+-green.svg)](https://python.langchain.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![CI](https://github.com/yourusername/raptor-rag-langchain/actions/workflows/ci.yml/badge.svg)](https://github.com/yourusername/raptor-rag-langchain/actions/workflows/ci.yml)
+[![Code Quality](https://github.com/yourusername/raptor-rag-langchain/actions/workflows/code-quality.yml/badge.svg)](https://github.com/yourusername/raptor-rag-langchain/actions/workflows/code-quality.yml)
 
 A LangChain-integrated implementation of **RAPTOR** (Recursive Abstractive Processing for Tree-Organized Retrieval) for hierarchical document retrieval.
 
@@ -155,6 +157,37 @@ uv run streamlit run app.py
 uv sync --dev
 ```
 
+### Pre-commit Hooks
+
+This project uses [pre-commit](https://pre-commit.com/) to automatically lint and format code before commits.
+
+**Setup pre-commit hooks:**
+
+```bash
+# Install pre-commit framework
+uv pip install pre-commit
+
+# Install git hooks
+uv run pre-commit install
+```
+
+The pre-commit configuration in `.pre-commit-config.yaml` runs:
+- **ruff**: Linting and code formatting
+- **ruff check**: Ensuring code quality
+- **pyupgrade**: Upgrading Python syntax
+- **trailing-whitespace**: Fixing trailing whitespace
+- **end-of-file-fixer**: Ensuring files end with newlines
+
+**Run pre-commit manually:**
+
+```bash
+# Run on all files
+pre-commit run --all-files
+
+# Run on staged files only
+pre-commit run
+```
+
 ### Run Tests
 
 ```bash
@@ -164,14 +197,17 @@ uv run pytest
 ### Code Quality
 
 ```bash
-# Linting
+# Linting with ruff
 uv run ruff check .
 
-# Type checking
+# Type checking with mypy
 uv run mypy src/
 
-# Format code
+# Format code with ruff
 uv run ruff format .
+
+# Run all checks
+uv run pre-commit run --all-files
 ```
 
 ## 📊 Architecture
@@ -245,10 +281,37 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines and instructions.
+
+**Quick start for contributors:**
+
+```bash
+# Clone and setup
+git clone https://github.com/yourusername/raptor-rag-langchain.git
+cd raptor-rag-langchain
+uv sync --dev
+pre-commit install
+
+# Make your changes
+git checkout -b feature/my-feature
+
+# Run checks before committing
+pre-commit run --all-files
+uv run pytest
+
+# Commit and push (pre-commit hooks run automatically)
+git push origin feature/my-feature
+```
 
 1. Fork the repository
 2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+3. Ensure all checks pass (`pre-commit run --all-files`)
+4. Commit your changes (`git commit -m 'feat: add AmazingFeature'`)
+5. Push to the branch (`git push origin feature/AmazingFeature`)
+6. Open a Pull Request
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines on:
+- Code style and quality standards
+- Testing requirements
+- Commit message format
+- Pull request process

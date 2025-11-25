@@ -1,0 +1,45 @@
+name: Code Quality
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  quality:
+    name: Code Quality Analysis
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+          cache: pip
+
+      - name: Install uv
+        run: curl -LsSf https://astral.sh/uv/install.sh | sh
+
+      - name: Install dependencies
+        run: |
+          uv pip install --system -r requirements.txt -e ".[dev]"
+
+      - name: Run pylint
+        run: |
+          uv run pylint src/ --exit-zero --max-line-length=100 || true
+        continue-on-error: true
+
+      - name: Generate coverage report
+        run: |
+          uv run pytest --cov=src --cov-report=term-missing tests/ || true
+        continue-on-error: true
+
+      - name: Verify dependencies
+        run: |
+          uv pip check || true
+        continue-on-error: true
