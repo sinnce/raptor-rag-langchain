@@ -10,6 +10,7 @@ https://github.com/parthsarthi03/raptor/blob/main/raptor/cluster_utils.py
 import logging
 import random
 from abc import ABC, abstractmethod
+from typing import Any
 
 import numpy as np
 import umap
@@ -229,7 +230,7 @@ class ClusteringAlgorithm(ABC):
     def perform_clustering(
         self,
         embeddings: np.ndarray,
-        **kwargs,
+        **kwargs: Any,
     ) -> list[list[int]]:
         """Perform clustering on embeddings.
 
@@ -273,13 +274,13 @@ class RaptorClustering(ClusteringAlgorithm):
     def perform_clustering(
         self,
         embeddings: np.ndarray,
-        **kwargs,
+        **_kwargs: Any,
     ) -> list[list[int]]:
         """Perform clustering on embeddings.
 
         Args:
             embeddings: Array of embedding vectors.
-            **kwargs: Additional parameters.
+            **_kwargs: Additional parameters.
 
         Returns:
             List of lists, where each inner list contains indices
@@ -297,10 +298,10 @@ class RaptorClustering(ClusteringAlgorithm):
 
         for idx, cluster_assignments in enumerate(clusters):
             for cluster_id in cluster_assignments:
-                cluster_id = int(cluster_id)
-                if cluster_id not in cluster_to_indices:
-                    cluster_to_indices[cluster_id] = []
-                cluster_to_indices[cluster_id].append(idx)
+                cid = int(cluster_id)
+                if cid not in cluster_to_indices:
+                    cluster_to_indices[cid] = []
+                cluster_to_indices[cid].append(idx)
 
         return list(cluster_to_indices.values())
 

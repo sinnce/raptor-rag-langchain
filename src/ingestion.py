@@ -7,6 +7,7 @@ Uses LangChain's document loaders and text splitters.
 import logging
 from collections.abc import Sequence
 from pathlib import Path
+from typing import cast
 
 import tiktoken
 from langchain_community.document_loaders import PyPDFLoader
@@ -84,7 +85,7 @@ class DocumentIngestion:
         documents = loader.load()
 
         logger.info(f"Loaded {len(documents)} pages from {pdf_path.name}")
-        return documents
+        return cast(list[Document], documents)
 
     def split_documents(
         self,
@@ -100,7 +101,7 @@ class DocumentIngestion:
         """
         chunks = self.text_splitter.split_documents(list(documents))
         logger.info(f"Split {len(documents)} documents into {len(chunks)} chunks")
-        return chunks
+        return cast(list[Document], chunks)
 
     def load_and_split(self, pdf_path: str | Path) -> list[Document]:
         """Load a PDF and split it into chunks in one step.

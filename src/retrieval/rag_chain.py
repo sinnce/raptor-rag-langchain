@@ -10,7 +10,7 @@ from typing import Any
 from langchain_core.language_models import BaseChatModel
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.runnables import RunnablePassthrough
+from langchain_core.runnables import Runnable, RunnablePassthrough
 from langchain_openai import ChatOpenAI
 
 from src.retrieval.vector_store import RaptorVectorStore
@@ -92,7 +92,7 @@ class RaptorRAGChain:
         """
         return "\n\n---\n\n".join(doc.page_content for doc in docs)
 
-    def _build_chain(self):
+    def _build_chain(self) -> Runnable:
         """Build the RAG chain.
 
         Returns:
@@ -128,7 +128,7 @@ class RaptorRAGChain:
         answer = self.chain.invoke(question, **kwargs)
 
         logger.debug(f"Generated answer of length {len(answer)}")
-        return answer
+        return str(answer)
 
     async def ainvoke(
         self,
@@ -144,7 +144,8 @@ class RaptorRAGChain:
         Returns:
             Generated answer string.
         """
-        return await self.chain.ainvoke(question, **kwargs)
+        answer = await self.chain.ainvoke(question, **kwargs)
+        return str(answer)
 
     def retrieve(
         self,

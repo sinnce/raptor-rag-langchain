@@ -9,15 +9,15 @@ from pathlib import Path
 import streamlit as st
 from dotenv import load_dotenv
 
-
-# Load environment variables
-load_dotenv()
-
 from src.ingestion import DocumentIngestion
 from src.raptor.tree_builder import TreeBuilder
 from src.retrieval.rag_chain import RaptorRAGChain
 from src.retrieval.vector_store import RaptorVectorStore
 from src.settings import settings
+
+
+# Load environment variables
+load_dotenv()
 
 
 # Configure logging
@@ -85,7 +85,7 @@ def upload_and_process() -> None:
         temp_path = Path(settings.raw_data_path) / uploaded_file.name
         settings.raw_data_path.mkdir(parents=True, exist_ok=True)
 
-        with open(temp_path, "wb") as f:
+        with temp_path.open("wb") as f:
             f.write(uploaded_file.getbuffer())
 
         st.success(f"Uploaded: {uploaded_file.name}")

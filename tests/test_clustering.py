@@ -33,7 +33,7 @@ class TestClusteringFunctions:
 
         assert len(labels) == len(sample_embeddings)
         assert n_clusters >= 1
-        assert all(isinstance(l, np.ndarray) for l in labels)
+        assert all(isinstance(label, np.ndarray) for label in labels)
 
     def test_perform_clustering(self, sample_embeddings: np.ndarray) -> None:
         """Test full clustering pipeline."""

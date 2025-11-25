@@ -5,7 +5,7 @@ for generating summaries of clustered text nodes.
 """
 
 import logging
-from typing import Any
+from typing import Any, cast
 
 from langchain_core.language_models import BaseChatModel
 from langchain_core.output_parsers import StrOutputParser
@@ -101,7 +101,7 @@ class SummarizationChain:
                 **kwargs,
             )
             logger.debug(f"Generated summary of length {len(summary)}")
-            return summary
+            return cast(str, summary)
         except Exception as e:
             logger.error(f"Error generating summary: {e}")
             raise
@@ -142,7 +142,7 @@ class SummarizationChain:
                 {"texts": combined_text},
                 **kwargs,
             )
-            return summary
+            return cast(str, summary)
         except Exception as e:
             logger.error(f"Error generating async summary: {e}")
             raise

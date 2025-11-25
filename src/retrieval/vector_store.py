@@ -8,12 +8,12 @@ This module handles VectorStore operations including:
 
 import logging
 from pathlib import Path
-from typing import Any, Literal
+from typing import Any, Literal, cast
 
 from langchain_community.vectorstores import FAISS, Chroma
 from langchain_core.documents import Document
 from langchain_core.embeddings import Embeddings
-from langchain_core.vectorstores import VectorStore
+from langchain_core.vectorstores import VectorStore, VectorStoreRetriever
 from langchain_openai import OpenAIEmbeddings
 
 from src.raptor.tree_structures import Node, RaptorTree
@@ -180,7 +180,7 @@ class RaptorVectorStore:
             raise ValueError("Vector store not initialized. Add documents first.")
 
         k = k or settings.top_k
-        return self._vector_store.similarity_search(query, k=k, **kwargs)
+        return cast(list[Document], self._vector_store.similarity_search(query, k=k, **kwargs))
 
     def similarity_search_with_score(
         self,
@@ -202,13 +202,16 @@ class RaptorVectorStore:
             raise ValueError("Vector store not initialized. Add documents first.")
 
         k = k or settings.top_k
-        return self._vector_store.similarity_search_with_score(query, k=k, **kwargs)
+        return cast(
+            list[tuple[Document, float]],
+            self._vector_store.similarity_search_with_score(query, k=k, **kwargs),
+        )
 
     def as_retriever(
         self,
         search_type: str = "similarity",
         search_kwargs: dict[str, Any] | None = None,
-    ):
+    ) -> VectorStoreRetriever:
         """Get a LangChain Retriever interface.
 
         Args:

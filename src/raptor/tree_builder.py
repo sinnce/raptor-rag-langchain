@@ -14,10 +14,11 @@ https://github.com/parthsarthi03/raptor/blob/main/raptor/tree_builder.py
 import copy
 import logging
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from typing import Any
+from typing import Any, cast
 
 import tiktoken
 from langchain_core.documents import Document
+from langchain_core.embeddings import Embeddings
 from langchain_openai import OpenAIEmbeddings
 
 from src.raptor.clustering import RaptorClustering
@@ -42,7 +43,7 @@ class TreeBuilder:
 
     def __init__(
         self,
-        embedding_model: Any | None = None,
+        embedding_model: Embeddings | None = None,
         summarization_chain: SummarizationChain | None = None,
         clustering: RaptorClustering | None = None,
         tokenizer: tiktoken.Encoding | None = None,
@@ -67,7 +68,7 @@ class TreeBuilder:
         """
         # Initialize embedding model
         if embedding_model is None:
-            self.embedding_model = OpenAIEmbeddings(
+            self.embedding_model: Embeddings = OpenAIEmbeddings(
                 model=settings.embedding_model,
                 api_key=settings.openai_api_key or None,
             )
@@ -112,7 +113,7 @@ class TreeBuilder:
         Returns:
             Embedding vector.
         """
-        return self.embedding_model.embed_query(text)
+        return cast(list[float], self.embedding_model.embed_query(text))
 
     def _create_node(
         self,
