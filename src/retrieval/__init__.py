@@ -8,8 +8,9 @@ This module contains the retrieval pipeline components:
 from src.retrieval.rag_chain import RaptorRAGChain, create_rag_chain
 from src.retrieval.vector_store import RaptorVectorStore
 
+
 __all__ = [
-    "RaptorVectorStore",
     "RaptorRAGChain",
+    "RaptorVectorStore",
     "create_rag_chain",
 ]

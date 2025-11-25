@@ -14,6 +14,7 @@ from langchain_openai import ChatOpenAI
 
 from src.settings import settings
 
+
 logger = logging.getLogger(__name__)
 
 # Default summarization prompt
@@ -33,11 +34,11 @@ Provide a clear and concise summary:"""
 
 class SummarizationChain:
     """LangChain-based summarization chain for RAPTOR.
-    
+
     This class wraps a LangChain chain for generating summaries
     of grouped text nodes.
     """
-    
+
     def __init__(
         self,
         llm: BaseChatModel | None = None,
@@ -45,14 +46,14 @@ class SummarizationChain:
         max_tokens: int | None = None,
     ) -> None:
         """Initialize the summarization chain.
-        
+
         Args:
             llm: LangChain chat model. Defaults to OpenAI.
             prompt_template: Custom prompt template. Uses default if not provided.
             max_tokens: Maximum tokens for summary output.
         """
         self.max_tokens = max_tokens or settings.summarization_length
-        
+
         # Initialize LLM
         if llm is None:
             self.llm = ChatOpenAI(
@@ -63,14 +64,14 @@ class SummarizationChain:
             )
         else:
             self.llm = llm
-        
+
         # Set up prompt template
         template = prompt_template or DEFAULT_SUMMARIZATION_PROMPT
         self.prompt = ChatPromptTemplate.from_template(template)
-        
+
         # Build the chain
         self.chain = self.prompt | self.llm | StrOutputParser()
-        
+
         logger.info(
             f"Initialized SummarizationChain with model={settings.summarization_model}, "
             f"max_tokens={self.max_tokens}"
@@ -82,17 +83,17 @@ class SummarizationChain:
         **kwargs: Any,
     ) -> str:
         """Generate a summary of multiple texts.
-        
+
         Args:
             texts: List of text strings to summarize.
             **kwargs: Additional arguments passed to the chain.
-            
+
         Returns:
             Summary string.
         """
         # Combine texts with separators
         combined_text = "\n\n---\n\n".join(texts)
-        
+
         # Generate summary
         try:
             summary = self.chain.invoke(
@@ -110,10 +111,10 @@ class SummarizationChain:
         nodes: list,  # List[Node] - avoiding circular import
     ) -> str:
         """Generate a summary of multiple nodes.
-        
+
         Args:
             nodes: List of Node objects to summarize.
-            
+
         Returns:
             Summary string.
         """
@@ -126,16 +127,16 @@ class SummarizationChain:
         **kwargs: Any,
     ) -> str:
         """Async version of summarize.
-        
+
         Args:
             texts: List of text strings to summarize.
             **kwargs: Additional arguments passed to the chain.
-            
+
         Returns:
             Summary string.
         """
         combined_text = "\n\n---\n\n".join(texts)
-        
+
         try:
             summary = await self.chain.ainvoke(
                 {"texts": combined_text},
@@ -153,12 +154,12 @@ def summarize_texts(
     max_tokens: int | None = None,
 ) -> str:
     """Utility function to summarize texts.
-    
+
     Args:
         texts: List of text strings to summarize.
         llm: Optional custom LLM.
         max_tokens: Maximum tokens for output.
-        
+
     Returns:
         Summary string.
     """
@@ -172,12 +173,12 @@ def get_summarization_chain(
     max_tokens: int | None = None,
 ) -> SummarizationChain:
     """Factory function to create a summarization chain.
-    
+
     Args:
         model_name: Name of the model to use.
         temperature: Model temperature.
         max_tokens: Maximum output tokens.
-        
+
     Returns:
         Configured SummarizationChain instance.
     """
@@ -187,5 +188,5 @@ def get_summarization_chain(
         max_tokens=max_tokens or settings.summarization_length,
         api_key=settings.openai_api_key or None,
     )
-    
+
     return SummarizationChain(llm=llm, max_tokens=max_tokens)

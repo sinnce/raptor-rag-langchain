@@ -6,5 +6,6 @@ for Tree-Organized Retrieval) for hierarchical document retrieval.
 
 from src.settings import get_settings, settings
 
+
 __version__ = "0.1.0"
-__all__ = ["settings", "get_settings", "__version__"]
+__all__ = ["__version__", "get_settings", "settings"]

@@ -139,7 +139,7 @@ class RaptorSettings(BaseSettings):
 @lru_cache
 def get_settings() -> RaptorSettings:
     """Get cached settings instance.
-    
+
     Returns:
         RaptorSettings: Application settings loaded from environment.
     """

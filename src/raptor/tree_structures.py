@@ -18,7 +18,7 @@ from langchain_core.documents import Document
 @dataclass
 class Node:
     """Represents a node in the RAPTOR hierarchical tree.
-    
+
     Attributes:
         text: The text content of the node.
         index: Unique index of the node in the tree.
@@ -28,7 +28,7 @@ class Node:
         node_id: Unique identifier for the node.
         metadata: Additional metadata for the node.
     """
-    
+
     text: str
     index: int
     level: int = 0
@@ -60,10 +60,10 @@ class Node:
 
     def to_document(self) -> Document:
         """Convert Node to LangChain Document.
-        
+
         This method enables seamless integration with LangChain's
         VectorStore and Retriever components.
-        
+
         Returns:
             Document: A LangChain Document with node metadata preserved.
         """
@@ -75,7 +75,7 @@ class Node:
             "children_ids": list(self.children),
             **self.metadata,
         }
-        
+
         return Document(
             page_content=self.text,
             metadata=metadata,
@@ -90,13 +90,13 @@ class Node:
         embeddings: dict[str, list[float]] | None = None,
     ) -> "Node":
         """Create a Node from a LangChain Document.
-        
+
         Args:
             document: The source LangChain Document.
             index: Unique index for the node.
             level: Tree level (0 for leaf nodes).
             embeddings: Pre-computed embeddings dictionary.
-            
+
         Returns:
             Node: A new Node instance.
         """
@@ -110,7 +110,7 @@ class Node:
 
     def add_embedding(self, model_name: str, embedding: list[float]) -> None:
         """Add an embedding for a specific model.
-        
+
         Args:
             model_name: Name of the embedding model.
             embedding: The embedding vector.
@@ -119,10 +119,10 @@ class Node:
 
     def get_embedding(self, model_name: str) -> list[float] | None:
         """Get embedding for a specific model.
-        
+
         Args:
             model_name: Name of the embedding model.
-            
+
         Returns:
             The embedding vector or None if not found.
         """
@@ -132,7 +132,7 @@ class Node:
 @dataclass
 class RaptorTree:
     """Represents the complete RAPTOR hierarchical tree structure.
-    
+
     Attributes:
         all_nodes: Dictionary mapping node indices to Node objects.
         root_nodes: Dictionary of root-level nodes.
@@ -140,7 +140,7 @@ class RaptorTree:
         num_layers: Total number of layers in the tree.
         layer_to_nodes: Mapping from layer number to list of nodes.
     """
-    
+
     all_nodes: dict[int, Node] = field(default_factory=dict)
     root_nodes: dict[int, Node] = field(default_factory=dict)
     leaf_nodes: dict[int, Node] = field(default_factory=dict)
@@ -155,18 +155,14 @@ class RaptorTree:
     @property
     def summary_nodes(self) -> dict[int, Node]:
         """Get all non-leaf (summary) nodes."""
-        return {
-            idx: node 
-            for idx, node in self.all_nodes.items() 
-            if not node.is_leaf
-        }
+        return {idx: node for idx, node in self.all_nodes.items() if not node.is_leaf}
 
     def get_node(self, index: int) -> Node | None:
         """Get a node by its index.
-        
+
         Args:
             index: The node index.
-            
+
         Returns:
             The Node or None if not found.
         """
@@ -174,10 +170,10 @@ class RaptorTree:
 
     def get_nodes_at_level(self, level: int) -> list[Node]:
         """Get all nodes at a specific level.
-        
+
         Args:
             level: The tree level (0 = leaf nodes).
-            
+
         Returns:
             List of nodes at the specified level.
         """
@@ -185,10 +181,10 @@ class RaptorTree:
 
     def collapse(self) -> list[Node]:
         """Collapse the tree into a flat list of all nodes.
-        
+
         This is the key operation for Collapsed Tree Retrieval:
         returns all nodes (leaves + summaries) for indexing.
-        
+
         Returns:
             List of all nodes sorted by index.
         """
@@ -196,7 +192,7 @@ class RaptorTree:
 
     def to_documents(self) -> list[Document]:
         """Convert all nodes to LangChain Documents.
-        
+
         Returns:
             List of Documents representing all tree nodes.
         """
@@ -204,27 +200,27 @@ class RaptorTree:
 
     def add_node(self, node: Node) -> None:
         """Add a node to the tree.
-        
+
         Args:
             node: The node to add.
         """
         self.all_nodes[node.index] = node
-        
+
         # Update layer mapping
         if node.level not in self.layer_to_nodes:
             self.layer_to_nodes[node.level] = []
         self.layer_to_nodes[node.level].append(node)
-        
+
         # Update leaf/root tracking
         if node.is_leaf:
             self.leaf_nodes[node.index] = node
-        
+
         # Update layer count
         self.num_layers = max(self.num_layers, node.level + 1)
 
     def set_root_nodes(self, root_nodes: dict[int, Node]) -> None:
         """Set the root nodes of the tree.
-        
+
         Args:
             root_nodes: Dictionary of root nodes.
         """
@@ -232,25 +228,23 @@ class RaptorTree:
 
     def get_children(self, node: Node) -> list[Node]:
         """Get all child nodes of a given node.
-        
+
         Args:
             node: The parent node.
-            
+
         Returns:
             List of child Node objects.
         """
         return [
-            self.all_nodes[child_idx] 
-            for child_idx in node.children 
-            if child_idx in self.all_nodes
+            self.all_nodes[child_idx] for child_idx in node.children if child_idx in self.all_nodes
         ]
 
     def get_text_from_nodes(self, nodes: list[Node]) -> str:
         """Concatenate text from multiple nodes.
-        
+
         Args:
             nodes: List of nodes.
-            
+
         Returns:
             Concatenated text with newlines between nodes.
         """

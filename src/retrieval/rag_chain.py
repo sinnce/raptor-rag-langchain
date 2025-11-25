@@ -16,6 +16,7 @@ from langchain_openai import ChatOpenAI
 from src.retrieval.vector_store import RaptorVectorStore
 from src.settings import settings
 
+
 logger = logging.getLogger(__name__)
 
 # Default QA prompt template
@@ -33,11 +34,11 @@ Answer:"""
 
 class RaptorRAGChain:
     """RAG chain for RAPTOR-based question answering.
-    
+
     This class combines the RAPTOR vector store retriever with
     an LLM to perform retrieval-augmented generation.
     """
-    
+
     def __init__(
         self,
         vector_store: RaptorVectorStore,
@@ -46,7 +47,7 @@ class RaptorRAGChain:
         top_k: int | None = None,
     ) -> None:
         """Initialize the RAG chain.
-        
+
         Args:
             vector_store: RAPTOR vector store for retrieval.
             llm: LangChain chat model for generation.
@@ -55,7 +56,7 @@ class RaptorRAGChain:
         """
         self.vector_store = vector_store
         self.top_k = top_k or settings.top_k
-        
+
         # Initialize LLM
         if llm is None:
             self.llm = ChatOpenAI(
@@ -65,30 +66,27 @@ class RaptorRAGChain:
             )
         else:
             self.llm = llm
-        
+
         # Set up prompt
         template = prompt_template or DEFAULT_QA_PROMPT
         self.prompt = ChatPromptTemplate.from_template(template)
-        
+
         # Get retriever
-        self.retriever = self.vector_store.as_retriever(
-            search_kwargs={"k": self.top_k}
-        )
-        
+        self.retriever = self.vector_store.as_retriever(search_kwargs={"k": self.top_k})
+
         # Build the chain
         self.chain = self._build_chain()
-        
+
         logger.info(
-            f"Initialized RaptorRAGChain with top_k={self.top_k}, "
-            f"model={settings.qa_model}"
+            f"Initialized RaptorRAGChain with top_k={self.top_k}, " f"model={settings.qa_model}"
         )
 
     def _format_docs(self, docs: list) -> str:
         """Format retrieved documents into a context string.
-        
+
         Args:
             docs: List of retrieved documents.
-            
+
         Returns:
             Formatted context string.
         """
@@ -96,7 +94,7 @@ class RaptorRAGChain:
 
     def _build_chain(self):
         """Build the RAG chain.
-        
+
         Returns:
             LangChain runnable chain.
         """
@@ -117,18 +115,18 @@ class RaptorRAGChain:
         **kwargs: Any,
     ) -> str:
         """Answer a question using RAG.
-        
+
         Args:
             question: The question to answer.
             **kwargs: Additional arguments for the chain.
-            
+
         Returns:
             Generated answer string.
         """
         logger.debug(f"Processing question: {question}")
-        
+
         answer = self.chain.invoke(question, **kwargs)
-        
+
         logger.debug(f"Generated answer of length {len(answer)}")
         return answer
 
@@ -138,11 +136,11 @@ class RaptorRAGChain:
         **kwargs: Any,
     ) -> str:
         """Async version of invoke.
-        
+
         Args:
             question: The question to answer.
             **kwargs: Additional arguments for the chain.
-            
+
         Returns:
             Generated answer string.
         """
@@ -154,11 +152,11 @@ class RaptorRAGChain:
         k: int | None = None,
     ) -> list:
         """Retrieve relevant documents without generation.
-        
+
         Args:
             query: Query string.
             k: Number of documents to retrieve.
-            
+
         Returns:
             List of retrieved documents.
         """
@@ -171,11 +169,11 @@ class RaptorRAGChain:
         k: int | None = None,
     ) -> list[tuple]:
         """Retrieve documents with similarity scores.
-        
+
         Args:
             query: Query string.
             k: Number of documents to retrieve.
-            
+
         Returns:
             List of (document, score) tuples.
         """
@@ -188,11 +186,11 @@ class RaptorRAGChain:
         **kwargs: Any,
     ) -> str:
         """Allow calling the chain directly.
-        
+
         Args:
             question: The question to answer.
             **kwargs: Additional arguments.
-            
+
         Returns:
             Generated answer string.
         """
@@ -206,13 +204,13 @@ def create_rag_chain(
     top_k: int | None = None,
 ) -> RaptorRAGChain:
     """Factory function to create a RAG chain.
-    
+
     Args:
         vector_store: RAPTOR vector store.
         model_name: LLM model name.
         temperature: Model temperature.
         top_k: Number of documents to retrieve.
-        
+
     Returns:
         Configured RaptorRAGChain instance.
     """
@@ -221,7 +219,7 @@ def create_rag_chain(
         temperature=temperature,
         api_key=settings.openai_api_key or None,
     )
-    
+
     return RaptorRAGChain(
         vector_store=vector_store,
         llm=llm,
