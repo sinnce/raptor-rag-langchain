@@ -238,20 +238,24 @@ class TreeBuilder:
         current_nodes: dict[int, Node],
         layer: int,
         next_index: int,
-    ) -> tuple[dict[int, Node], int]:
+        return_models: bool = False,
+    ) -> tuple[dict[int, Node], int, Any, Any]:
         """Build a single layer of the tree.
 
         Args:
             current_nodes: Nodes at the current layer.
             layer: Current layer number.
             next_index: Next available node index.
+            return_models: Whether to return the global UMAP and GMM models.
 
         Returns:
-            Tuple of (new layer nodes, next index).
+            Tuple of (new layer nodes, next index, umap_model, gmm_model).
         """
         logger.info(f"Building layer {layer + 1}")
 
         node_list = list(current_nodes.values())
+        umap_model = None
+        gmm_model = None
 
         # Check if we can cluster
         if len(node_list) <= self.clustering.reduction_dimension + 1:
@@ -259,13 +263,27 @@ class TreeBuilder:
                 f"Cannot create more layers: only {len(node_list)} nodes. "
                 f"Stopping at layer {layer}."
             )
-            return {}, next_index
+            return {}, next_index, None, None
+
+        # Prepare embeddings for clustering
+        embeddings = np.array([node.embeddings[self.embedding_model_name] for node in node_list])
 
         # Cluster the nodes
-        clusters = self.clustering.cluster_nodes(
-            node_list,
-            self.embedding_model_name,
-        )
+        if return_models:
+            # We need to call perform_clustering directly or modify RaptorClustering.cluster_nodes
+            # Modifying RaptorClustering logic here locally to access models
+            # This logic mimics RaptorClustering.cluster_nodes but calls perform_clustering with return_models=True
+            cluster_assignments_indices, umap_model, gmm_model = self.clustering.perform_clustering_with_models(
+                embeddings
+            )
+
+            # Convert indices back to nodes
+            clusters = [[node_list[idx] for idx in cluster] for cluster in cluster_assignments_indices]
+        else:
+            clusters = self.clustering.cluster_nodes(
+                node_list,
+                self.embedding_model_name,
+            )
 
         logger.info(f"Created {len(clusters)} clusters at layer {layer + 1}")
 
@@ -297,7 +315,7 @@ class TreeBuilder:
 
             next_index += 1
 
-        return new_layer_nodes, next_index
+        return new_layer_nodes, next_index, umap_model, gmm_model
 
     def build_tree(
         self,
@@ -324,13 +342,24 @@ class TreeBuilder:
         current_level_nodes = leaf_nodes
         next_index = len(leaf_nodes)
 
+        global_umap = None
+        global_gmm = None
+
         # Build layers recursively
         for layer in range(self.num_layers):
-            new_layer_nodes, next_index = self._build_layer(
+            # Capture models only for the first layer (leaves -> layer 1)
+            capture_models = (layer == 0)
+
+            new_layer_nodes, next_index, umap_model, gmm_model = self._build_layer(
                 current_level_nodes,
                 layer,
                 next_index,
+                return_models=capture_models,
             )
+
+            if capture_models:
+                global_umap = umap_model
+                global_gmm = gmm_model
 
             if not new_layer_nodes:
                 # Cannot create more layers
@@ -348,6 +377,8 @@ class TreeBuilder:
             leaf_nodes=leaf_nodes,
             num_layers=len(layer_to_nodes),
             layer_to_nodes=layer_to_nodes,
+            umap_model=global_umap,
+            gmm_model=global_gmm,
         )
 
         logger.info(f"Built tree with {tree.total_nodes} total nodes, " f"{tree.num_layers} layers")

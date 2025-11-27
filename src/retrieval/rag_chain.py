@@ -7,6 +7,7 @@ that combines the RAPTOR vector store with LLM-based question answering.
 import logging
 from typing import Any
 
+import numpy as np
 from langchain_core.language_models import BaseChatModel
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
@@ -72,6 +73,11 @@ class RaptorRAGChain:
         template = prompt_template or DEFAULT_QA_PROMPT
         self.prompt = ChatPromptTemplate.from_template(template)
 
+        # Load relevance models if available
+        self.umap_model, self.gmm_model = self.vector_store.load_models(
+            self.vector_store.persist_directory
+        )
+
         # Get retriever
         self.retriever = self.vector_store.as_retriever(search_kwargs={"k": self.top_k})
 
@@ -81,6 +87,44 @@ class RaptorRAGChain:
         logger.info(
             f"Initialized RaptorRAGChain with top_k={self.top_k}, " f"model={settings.qa_model}"
         )
+
+    def check_query_relevance(self, query: str) -> bool:
+        """Check if the query is relevant to the database using GMM models.
+
+        Args:
+            query: The query string.
+
+        Returns:
+            True if relevant, False otherwise.
+        """
+        if self.umap_model is None or self.gmm_model is None:
+            # If no models are loaded, assume relevant (backward compatibility)
+            return True
+
+        if settings.query_gmm_threshold <= 0:
+            return True
+
+        try:
+            # Embed the query
+            query_embedding = self.vector_store.embedding_model.embed_query(query)
+            query_embedding = np.array([query_embedding])
+
+            # Reduce dimensionality
+            reduced_embedding = self.umap_model.transform(query_embedding)
+
+            # Predict probabilities
+            probs = self.gmm_model.predict_proba(reduced_embedding)[0]
+
+            # Check if any cluster probability exceeds the threshold
+            max_prob = max(probs)
+            logger.debug(f"Query max probability in GMM clusters: {max_prob:.4f}")
+
+            return max_prob >= settings.query_gmm_threshold
+
+        except Exception as e:
+            logger.warning(f"Error checking query relevance: {e}")
+            # On error, fallback to assuming relevant
+            return True
 
     def _format_docs(self, docs: list) -> str:
         """Format retrieved documents into a context string.
@@ -126,6 +170,10 @@ class RaptorRAGChain:
         """
         logger.debug(f"Processing question: {question}")
 
+        if not self.check_query_relevance(question):
+            logger.info("Query rejected due to low relevance probability.")
+            return "I don't have enough information to answer this question."
+
         answer = self.chain.invoke(question, **kwargs)
 
         logger.debug(f"Generated answer of length {len(answer)}")
@@ -145,6 +193,12 @@ class RaptorRAGChain:
         Returns:
             Generated answer string.
         """
+        # Note: check_query_relevance is synchronous but fast enough.
+        # If strict async is needed, we should wrap it.
+        if not self.check_query_relevance(question):
+            logger.info("Query rejected due to low relevance probability.")
+            return "I don't have enough information to answer this question."
+
         answer = await self.chain.ainvoke(question, **kwargs)
         return str(answer)
 
