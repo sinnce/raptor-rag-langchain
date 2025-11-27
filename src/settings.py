@@ -26,6 +26,7 @@ class RaptorSettings(BaseSettings):
     # LLM API Keys
     # ===========================================
     openai_api_key: str = Field(default="", description="OpenAI API Key")
+    openai_base_url: str = Field(default="", description="OpenAI Base URL")
     google_api_key: str = Field(default="", description="Google AI API Key")
 
     # ===========================================
@@ -36,11 +37,11 @@ class RaptorSettings(BaseSettings):
         description="Embedding model name",
     )
     summarization_model: str = Field(
-        default="gpt-4o-mini",
+        default="gpt-5-mini",
         description="Model for summarization tasks",
     )
     qa_model: str = Field(
-        default="gpt-4o-mini",
+        default="gpt-5-mini",
         description="Model for QA tasks",
     )
 

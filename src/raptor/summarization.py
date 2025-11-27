@@ -57,6 +57,7 @@ class SummarizationChain:
         # Initialize LLM
         if llm is None:
             self.llm = ChatOpenAI(
+                base_url=settings.openai_base_url or None,
                 model=settings.summarization_model,
                 temperature=0,
                 max_tokens=self.max_tokens,
@@ -183,6 +184,7 @@ def get_summarization_chain(
         Configured SummarizationChain instance.
     """
     llm = ChatOpenAI(
+        base_url=settings.openai_base_url or None,
         model=model_name or settings.summarization_model,
         temperature=temperature,
         max_tokens=max_tokens or settings.summarization_length,

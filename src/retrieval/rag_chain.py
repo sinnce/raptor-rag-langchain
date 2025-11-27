@@ -60,6 +60,7 @@ class RaptorRAGChain:
         # Initialize LLM
         if llm is None:
             self.llm = ChatOpenAI(
+                base_url=settings.openai_base_url or None,
                 model=settings.qa_model,
                 temperature=0,
                 api_key=settings.openai_api_key or None,
@@ -216,6 +217,7 @@ def create_rag_chain(
         Configured RaptorRAGChain instance.
     """
     llm = ChatOpenAI(
+        base_url=settings.openai_base_url or None,
         model=model_name or settings.qa_model,
         temperature=temperature,
         api_key=settings.openai_api_key or None,
