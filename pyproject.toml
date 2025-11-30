@@ -21,7 +21,7 @@ classifiers = [
 
 dependencies = [
     # LangChain Core
-    "langchain>=0.3.0",
+    "langchain[google-genai]>=0.3.0",
     "langchain-community>=0.3.0",
     "langchain-openai>=0.2.0",
     "langchain-google-genai>=2.0.0",
@@ -48,6 +48,16 @@ dependencies = [
     "streamlit>=1.38.0",
     # Environment Variables
     "dotenv>=0.9.9",
+    "langchain-huggingface>=1.1.0",
+    "sentence-transformers>=5.1.2",
+    "langchain-core>=1.1.0",
+    "langchain-text-splitters>=1.0.0",
+    "langsmith>=0.4.47",
+    "beautifulsoup4>=4.14.2",
+    "selenium>=4.38.0",
+    "requests>=2.32.5",
+    "lxml>=6.0.2",
+    "jq>=1.10.0",
 ]
 
 [project.optional-dependencies]
