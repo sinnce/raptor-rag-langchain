@@ -1,0 +1,396 @@
+{
+    "mcq": [
+        {
+            "number": 1,
+            "type": "mcq",
+            "question": "What is the primary goal of a Database-Management System (DBMS)?",
+            "answer_options": [
+                "(A) To manage computer hardware",
+                "(B) To provide faster network connections",
+                "(C) To provide a way to store and access interrelated data",
+                "(D) To ensure all data is numerical",
+                "(E) Don't Know"
+            ],
+            "ground_truth_answer": "(C)",
+            "correct_node_id": "10da1f98-e19e-4144-b51a-8378d8fe7d59",
+            "ground_truth_context": "Page 1209\nC \nH A P T E R  25\nAdvanced Application\nDevelopment\nThere are a number of tasks in application development. We\nsaw in Chapter 6 to Chapter 9 how to design and build an\napplication. One of the aspects of application design is the\nperformance one expects out of the application. In fact, it is\ncommon to ﬁnd that once an application has been built, it\nruns slower than the designers wanted or handles fewer\ntransactions per second than they required. An application\nthat takes an excessive amount of time to perform\nrequested actions can cause user dissatisfaction at best and\nbe completely unusable at worst.\nApplications can be made to run signiﬁcantly faster by\nperformance tuning, which consists of ﬁnding and\neliminating bottlenecks and adding appropriate hardware\nsuch as memory or disks. There are many things an\napplication developer can do to tune the application, and"
+        },
+        {
+            "number": 2,
+            "type": "mcq",
+            "question": "Which SQL language component provides commands for defining relation schemas, deleting relations, and specifying integrity constraints?",
+            "answer_options": [
+                "(A) DML (Data Manipulation Language)",
+                "(B) DDL (Data Definition Language)",
+                "(C) QL (Query Language)",
+                "(D) ETL (Extract, Transform, Load)",
+                "(E) Don't Know"
+            ],
+            "ground_truth_answer": "(B)",
+            "correct_node_id": "7b914819-1d8d-43fd-a33c-6e30aa6dc312",
+            "ground_truth_context": "Page 1247\ntransactions of type B run at 100 per second, and\ntransactions of type C run at 200 per second. Suppose\nthe mix of transactions has 25 percent of type A, 25\npercent of type B, and 50 percent of type C.\na. What is the average transaction throughput of\nthe system, assuming there is no interference between\nthe transactions?\nb. What factors may result in interference between the\ntransactions of diﬀerent types, leading to the calculated\nthroughput being incorrect?\n25.7 Suppose an application programmer was supposed to\nwrite a query\nselect *\nfrom r natural left outer join s;\non relations r(A, B) and s(B, C), but instead wrote the\nquery\nselect *\nfrom r natural join s;\na. Give sample data for r and s on which both queries\nwould give the same result.\nb. Give sample data for r and s where the two queries\nwould give diﬀerent results, thereby exposing the error\nin the query,\n25.8 List some beneﬁts and drawbacks of an anticipatory\nstandard compared to a reactionary standard.\n25.9 Describe how LDAP can be used to provide multiple\nhierarchical views of data, without replicating the base-\nlevel data.\nExercises"
+        },
+        {
+            "number": 3,
+            "type": "mcq",
+            "question": "In the Entity-Relationship (E-R) model, what is an association among several entities called?",
+            "answer_options": [
+                "(A) Entity Set",
+                "(B) Attribute",
+                "(C) Relationship Set",
+                "(D) Domain",
+                "(E) Don't Know"
+            ],
+            "ground_truth_answer": "(C)",
+            "correct_node_id": "10da1f98-e19e-4144-b51a-8378d8fe7d59",
+            "ground_truth_context": "Page 1209\nC \nH A P T E R  25\nAdvanced Application\nDevelopment\nThere are a number of tasks in application development. We\nsaw in Chapter 6 to Chapter 9 how to design and build an\napplication. One of the aspects of application design is the\nperformance one expects out of the application. In fact, it is\ncommon to ﬁnd that once an application has been built, it\nruns slower than the designers wanted or handles fewer\ntransactions per second than they required. An application\nthat takes an excessive amount of time to perform\nrequested actions can cause user dissatisfaction at best and\nbe completely unusable at worst.\nApplications can be made to run signiﬁcantly faster by\nperformance tuning, which consists of ﬁnding and\neliminating bottlenecks and adding appropriate hardware\nsuch as memory or disks. There are many things an\napplication developer can do to tune the application, and"
+        },
+        {
+            "number": 4,
+            "type": "mcq",
+            "question": "In the relational algebra, which operation corresponds conceptually to the SQL `where` clause, filtering tuples based on a predicate?",
+            "answer_options": [
+                "(A) Project ($\\Pi$)",
+                "(B) Cartesian Product ($\\times$)",
+                "(C) Select ($\\sigma$)",
+                "(D) Rename ($\\rho$)",
+                "(E) Don't Know"
+            ],
+            "ground_truth_answer": "(C)",
+            "correct_node_id": "10da1f98-e19e-4144-b51a-8378d8fe7d59",
+            "ground_truth_context": "Page 1209\nC \nH A P T E R  25\nAdvanced Application\nDevelopment\nThere are a number of tasks in application development. We\nsaw in Chapter 6 to Chapter 9 how to design and build an\napplication. One of the aspects of application design is the\nperformance one expects out of the application. In fact, it is\ncommon to ﬁnd that once an application has been built, it\nruns slower than the designers wanted or handles fewer\ntransactions per second than they required. An application\nthat takes an excessive amount of time to perform\nrequested actions can cause user dissatisfaction at best and\nbe completely unusable at worst.\nApplications can be made to run signiﬁcantly faster by\nperformance tuning, which consists of ﬁnding and\neliminating bottlenecks and adding appropriate hardware\nsuch as memory or disks. There are many things an\napplication developer can do to tune the application, and"
+        },
+        {
+            "number": 5,
+            "type": "mcq",
+            "question": "The property of a transaction that guarantees that once the transaction successfully completes (commits), its changes will persist, even if system failures occur, is known as:",
+            "answer_options": [
+                "(A) Atomicity",
+                "(B) Consistency",
+                "(C) Isolation",
+                "(D) Durability",
+                "(E) Don't Know"
+            ],
+            "ground_truth_answer": "(D)",
+            "correct_node_id": "cbe29ff5-6536-4085-b848-54089b979efd",
+            "ground_truth_context": "Page 907\nC \nH \nA \nP T E R  19\nRecovery System\nA computer system, like any other device, is subject to\nfailure from a variety of causes: disk crash, power outage,\nsoftware error, a ﬁre in the machine room, even sabotage.\nIn any failure, information may be lost. Therefore, the\ndatabase system must take actions in advance to ensure\nthat the atomicity and durability properties of transactions,\nintroduced in Chapter 17, are preserved. An integral part of\na database system is a recovery scheme that can restore\nthe database to the consistent state that existed before the\nfailure.\nThe recovery scheme must also support high\navailability, that is, the database should be usable for a\nvery high percentage of time. To support high availability in\nthe face of machine failure (as also planned machine\nshutdowns for hardware/software upgrades and\nmaintenance), the recovery scheme must support the ability\nto keep a backup copy of the database synchronized with"
+        },
+        {
+            "number": 6,
+            "type": "mcq",
+            "question": "The Logical Schema describes the database design primarily in terms of a small number of relatively simple structures. What key benefit does this abstraction provide regarding physical storage details?",
+            "answer_options": [
+                "(A) Logical Data Independence",
+                "(B) Physical Data Independence",
+                "(C) View Abstraction",
+                "(D) Transaction Serializability",
+                "(E) Don't Know"
+            ],
+            "ground_truth_answer": "(B)",
+            "correct_node_id": "7b914819-1d8d-43fd-a33c-6e30aa6dc312",
+            "ground_truth_context": "Page 1247\ntransactions of type B run at 100 per second, and\ntransactions of type C run at 200 per second. Suppose\nthe mix of transactions has 25 percent of type A, 25\npercent of type B, and 50 percent of type C.\na. What is the average transaction throughput of\nthe system, assuming there is no interference between\nthe transactions?\nb. What factors may result in interference between the\ntransactions of diﬀerent types, leading to the calculated\nthroughput being incorrect?\n25.7 Suppose an application programmer was supposed to\nwrite a query\nselect *\nfrom r natural left outer join s;\non relations r(A, B) and s(B, C), but instead wrote the\nquery\nselect *\nfrom r natural join s;\na. Give sample data for r and s on which both queries\nwould give the same result.\nb. Give sample data for r and s where the two queries\nwould give diﬀerent results, thereby exposing the error\nin the query,\n25.8 List some beneﬁts and drawbacks of an anticipatory\nstandard compared to a reactionary standard.\n25.9 Describe how LDAP can be used to provide multiple\nhierarchical views of data, without replicating the base-\nlevel data.\nExercises"
+        },
+        {
+            "number": 7,
+            "type": "mcq",
+            "question": "What is the technical term for a unique name assigned to a relation within an SQL query (like T or S in a self-join) that allows for distinguishing between different references to the same relation?",
+            "answer_options": [
+                "(A) Primary Key",
+                "(B) Superkey",
+                "(C) Correlation Name (Alias)",
+                "(D) Multiset",
+                "(E) Don't Know"
+            ],
+            "ground_truth_answer": "(C)",
+            "correct_node_id": "10da1f98-e19e-4144-b51a-8378d8fe7d59",
+            "ground_truth_context": "Page 1209\nC \nH A P T E R  25\nAdvanced Application\nDevelopment\nThere are a number of tasks in application development. We\nsaw in Chapter 6 to Chapter 9 how to design and build an\napplication. One of the aspects of application design is the\nperformance one expects out of the application. In fact, it is\ncommon to ﬁnd that once an application has been built, it\nruns slower than the designers wanted or handles fewer\ntransactions per second than they required. An application\nthat takes an excessive amount of time to perform\nrequested actions can cause user dissatisfaction at best and\nbe completely unusable at worst.\nApplications can be made to run signiﬁcantly faster by\nperformance tuning, which consists of ﬁnding and\neliminating bottlenecks and adding appropriate hardware\nsuch as memory or disks. There are many things an\napplication developer can do to tune the application, and"
+        },
+        {
+            "number": 8,
+            "type": "mcq",
+            "question": "In the E-R model, how is a weak entity set graphically distinguished from a strong entity set?",
+            "answer_options": [
+                "(A) By a single diamond",
+                "(B) By a dashed line",
+                "(C) By a double rectangle",
+                "(D) By an arrow pointing to the strong entity",
+                "(E) Don't Know"
+            ],
+            "ground_truth_answer": "(C)",
+            "correct_node_id": "10da1f98-e19e-4144-b51a-8378d8fe7d59",
+            "ground_truth_context": "Page 1209\nC \nH A P T E R  25\nAdvanced Application\nDevelopment\nThere are a number of tasks in application development. We\nsaw in Chapter 6 to Chapter 9 how to design and build an\napplication. One of the aspects of application design is the\nperformance one expects out of the application. In fact, it is\ncommon to ﬁnd that once an application has been built, it\nruns slower than the designers wanted or handles fewer\ntransactions per second than they required. An application\nthat takes an excessive amount of time to perform\nrequested actions can cause user dissatisfaction at best and\nbe completely unusable at worst.\nApplications can be made to run signiﬁcantly faster by\nperformance tuning, which consists of ﬁnding and\neliminating bottlenecks and adding appropriate hardware\nsuch as memory or disks. There are many things an\napplication developer can do to tune the application, and"
+        },
+        {
+            "number": 9,
+            "type": "mcq",
+            "question": "A sparse index can only be used if the underlying relation file is stored in which specific order?",
+            "answer_options": [
+                "(A) Hashed order",
+                "(B) Random order",
+                "(C) Sorted order of the search key",
+                "(D) Multiset order",
+                "(E) Don't Know"
+            ],
+            "ground_truth_answer": "(C)",
+            "correct_node_id": "10da1f98-e19e-4144-b51a-8378d8fe7d59",
+            "ground_truth_context": "Page 1209\nC \nH A P T E R  25\nAdvanced Application\nDevelopment\nThere are a number of tasks in application development. We\nsaw in Chapter 6 to Chapter 9 how to design and build an\napplication. One of the aspects of application design is the\nperformance one expects out of the application. In fact, it is\ncommon to ﬁnd that once an application has been built, it\nruns slower than the designers wanted or handles fewer\ntransactions per second than they required. An application\nthat takes an excessive amount of time to perform\nrequested actions can cause user dissatisfaction at best and\nbe completely unusable at worst.\nApplications can be made to run signiﬁcantly faster by\nperformance tuning, which consists of ﬁnding and\neliminating bottlenecks and adding appropriate hardware\nsuch as memory or disks. There are many things an\napplication developer can do to tune the application, and"
+        },
+        {
+            "number": 10,
+            "type": "mcq",
+            "question": "What is the essential structural property of B+-trees that ensures consistent and efficient lookup performance regardless of the key being searched?",
+            "answer_options": [
+                "(A) Clustered",
+                "(B) Sparse",
+                "(C) Balanced",
+                "(D) Indexed",
+                "(E) Don't Know"
+            ],
+            "ground_truth_answer": "(C)",
+            "correct_node_id": "10da1f98-e19e-4144-b51a-8378d8fe7d59",
+            "ground_truth_context": "Page 1209\nC \nH A P T E R  25\nAdvanced Application\nDevelopment\nThere are a number of tasks in application development. We\nsaw in Chapter 6 to Chapter 9 how to design and build an\napplication. One of the aspects of application design is the\nperformance one expects out of the application. In fact, it is\ncommon to ﬁnd that once an application has been built, it\nruns slower than the designers wanted or handles fewer\ntransactions per second than they required. An application\nthat takes an excessive amount of time to perform\nrequested actions can cause user dissatisfaction at best and\nbe completely unusable at worst.\nApplications can be made to run signiﬁcantly faster by\nperformance tuning, which consists of ﬁnding and\neliminating bottlenecks and adding appropriate hardware\nsuch as memory or disks. There are many things an\napplication developer can do to tune the application, and"
+        },
+        {
+            "number": 11,
+            "type": "mcq",
+            "question": "In SQL's three-valued logic, if a comparison predicate within a `where` clause evaluates to unknown due to the presence of a NULL value, what happens to the corresponding tuple?",
+            "answer_options": [
+                "(A) The tuple is treated as TRUE.",
+                "(B) The tuple is retained in the result set.",
+                "(C) The tuple is not added to the result set.",
+                "(D) The tuple causes a run-time error.",
+                "(E) Don't Know"
+            ],
+            "ground_truth_answer": "(C)",
+            "correct_node_id": "10da1f98-e19e-4144-b51a-8378d8fe7d59",
+            "ground_truth_context": "Page 1209\nC \nH A P T E R  25\nAdvanced Application\nDevelopment\nThere are a number of tasks in application development. We\nsaw in Chapter 6 to Chapter 9 how to design and build an\napplication. One of the aspects of application design is the\nperformance one expects out of the application. In fact, it is\ncommon to ﬁnd that once an application has been built, it\nruns slower than the designers wanted or handles fewer\ntransactions per second than they required. An application\nthat takes an excessive amount of time to perform\nrequested actions can cause user dissatisfaction at best and\nbe completely unusable at worst.\nApplications can be made to run signiﬁcantly faster by\nperformance tuning, which consists of ﬁnding and\neliminating bottlenecks and adding appropriate hardware\nsuch as memory or disks. There are many things an\napplication developer can do to tune the application, and"
+        },
+        {
+            "number": 12,
+            "type": "mcq",
+            "question": "When generating relation schemas from an E-R diagram, how are Composite Attributes (like `address` broken into `street` and `city`) handled?",
+            "answer_options": [
+                "(A) The composite attribute is discarded.",
+                "(B) A separate attribute is created for each of the component attributes.",
+                "(C) A separate relation schema is created for the composite attribute.",
+                "(D) They are converted into multivalued attributes.",
+                "(E) Don't Know"
+            ],
+            "ground_truth_answer": "(B)",
+            "correct_node_id": "7b914819-1d8d-43fd-a33c-6e30aa6dc312",
+            "ground_truth_context": "Page 1247\ntransactions of type B run at 100 per second, and\ntransactions of type C run at 200 per second. Suppose\nthe mix of transactions has 25 percent of type A, 25\npercent of type B, and 50 percent of type C.\na. What is the average transaction throughput of\nthe system, assuming there is no interference between\nthe transactions?\nb. What factors may result in interference between the\ntransactions of diﬀerent types, leading to the calculated\nthroughput being incorrect?\n25.7 Suppose an application programmer was supposed to\nwrite a query\nselect *\nfrom r natural left outer join s;\non relations r(A, B) and s(B, C), but instead wrote the\nquery\nselect *\nfrom r natural join s;\na. Give sample data for r and s on which both queries\nwould give the same result.\nb. Give sample data for r and s where the two queries\nwould give diﬀerent results, thereby exposing the error\nin the query,\n25.8 List some beneﬁts and drawbacks of an anticipatory\nstandard compared to a reactionary standard.\n25.9 Describe how LDAP can be used to provide multiple\nhierarchical views of data, without replicating the base-\nlevel data.\nExercises"
+        },
+        {
+            "number": 13,
+            "type": "mcq",
+            "question": "When designing a database, which concept refers to data about data, such as the names of the attributes, their domains, and constraints, which is typically stored in the system's own tables?",
+            "answer_options": [
+                "(A) View",
+                "(B) Instance",
+                "(C) Metadata (Data Dictionary)",
+                "(D) Domain",
+                "(E) Don't Know"
+            ],
+            "ground_truth_answer": "(C)",
+            "correct_node_id": "10da1f98-e19e-4144-b51a-8378d8fe7d59",
+            "ground_truth_context": "Page 1209\nC \nH A P T E R  25\nAdvanced Application\nDevelopment\nThere are a number of tasks in application development. We\nsaw in Chapter 6 to Chapter 9 how to design and build an\napplication. One of the aspects of application design is the\nperformance one expects out of the application. In fact, it is\ncommon to ﬁnd that once an application has been built, it\nruns slower than the designers wanted or handles fewer\ntransactions per second than they required. An application\nthat takes an excessive amount of time to perform\nrequested actions can cause user dissatisfaction at best and\nbe completely unusable at worst.\nApplications can be made to run signiﬁcantly faster by\nperformance tuning, which consists of ﬁnding and\neliminating bottlenecks and adding appropriate hardware\nsuch as memory or disks. There are many things an\napplication developer can do to tune the application, and"
+        },
+        {
+            "number": 14,
+            "type": "mcq",
+            "question": "In the SQL query processing pipeline, which step is evaluated first, establishing the Cartesian product of the relations involved?",
+            "answer_options": [
+                "(A) `select` clause",
+                "(B) `where` clause",
+                "(C) `from` clause",
+                "(D) `group by` clause",
+                "(E) Don't Know"
+            ],
+            "ground_truth_answer": "(C)",
+            "correct_node_id": "10da1f98-e19e-4144-b51a-8378d8fe7d59",
+            "ground_truth_context": "Page 1209\nC \nH A P T E R  25\nAdvanced Application\nDevelopment\nThere are a number of tasks in application development. We\nsaw in Chapter 6 to Chapter 9 how to design and build an\napplication. One of the aspects of application design is the\nperformance one expects out of the application. In fact, it is\ncommon to ﬁnd that once an application has been built, it\nruns slower than the designers wanted or handles fewer\ntransactions per second than they required. An application\nthat takes an excessive amount of time to perform\nrequested actions can cause user dissatisfaction at best and\nbe completely unusable at worst.\nApplications can be made to run signiﬁcantly faster by\nperformance tuning, which consists of ﬁnding and\neliminating bottlenecks and adding appropriate hardware\nsuch as memory or disks. There are many things an\napplication developer can do to tune the application, and"
+        },
+        {
+            "number": 15,
+            "type": "mcq",
+            "question": "The SQL standard includes constructs that, when combined, give SQL almost the full power of a general-purpose programming language. This functionality is often associated with the standard's support for:",
+            "answer_options": [
+                "(A) E-R Modeling",
+                "(B) Relational Algebra",
+                "(C) Functions and Procedures",
+                "(D) Multivalued Dependencies",
+                "(E) Don't Know"
+            ],
+            "ground_truth_answer": "(C)",
+            "correct_node_id": "10da1f98-e19e-4144-b51a-8378d8fe7d59",
+            "ground_truth_context": "Page 1209\nC \nH A P T E R  25\nAdvanced Application\nDevelopment\nThere are a number of tasks in application development. We\nsaw in Chapter 6 to Chapter 9 how to design and build an\napplication. One of the aspects of application design is the\nperformance one expects out of the application. In fact, it is\ncommon to ﬁnd that once an application has been built, it\nruns slower than the designers wanted or handles fewer\ntransactions per second than they required. An application\nthat takes an excessive amount of time to perform\nrequested actions can cause user dissatisfaction at best and\nbe completely unusable at worst.\nApplications can be made to run signiﬁcantly faster by\nperformance tuning, which consists of ﬁnding and\neliminating bottlenecks and adding appropriate hardware\nsuch as memory or disks. There are many things an\napplication developer can do to tune the application, and"
+        },
+        {
+            "number": 16,
+            "type": "mcq",
+            "question": "The process of Object-Relational Mapping (ORM) involves systems that define the mapping between objects in a programming language (like Java) and tuples in the database relations. Which layer of a typical three-tier architecture is primarily responsible for running the ORM logic to handle data persistence and retrieval?",
+            "answer_options": [
+                "(A) User-interface layer",
+                "(B) Presentation layer",
+                "(C) Data access layer",
+                "(D) Physical storage layer",
+                "(E) Don't Know"
+            ],
+            "ground_truth_answer": "(E)",
+            "correct_node_id": "3271cb70-631d-49c3-a53e-f83b8aa16a3e",
+            "ground_truth_context": "Page 286\nFigure 6.26 Symbols used in the E-R notation.\n6.10.1 Alternative E-R Notations\nFigure 6.27 indicates some of the alternative E-R notations\nthat are widely used. One alternative representation of\nattributes of entities is to show them in ovals connected to\nthe box representing the entity; primary key\nattributes are indicated by underlining them. The\nabove notation is shown at the top of the ﬁgure. Relationship"
+        },
+        {
+            "number": 17,
+            "type": "mcq",
+            "question": "The theory of Fifth Normal Form (5NF), which deals with join dependencies beyond those implied by functional or multivalued dependencies, is primarily covered in which specialized chapter of the textbook?",
+            "answer_options": [
+                "(A) Chapter 7 (Relational Database Design)",
+                "(B) Chapter 16 (Query Optimization)",
+                "(C) Chapter 23 (Security)",
+                "(D) Chapter 28 (Advanced Topics in Relational Database Design)",
+                "(E) Don't Know"
+            ],
+            "ground_truth_answer": "(E)",
+            "correct_node_id": "3271cb70-631d-49c3-a53e-f83b8aa16a3e",
+            "ground_truth_context": "Page 286\nFigure 6.26 Symbols used in the E-R notation.\n6.10.1 Alternative E-R Notations\nFigure 6.27 indicates some of the alternative E-R notations\nthat are widely used. One alternative representation of\nattributes of entities is to show them in ovals connected to\nthe box representing the entity; primary key\nattributes are indicated by underlining them. The\nabove notation is shown at the top of the ﬁgure. Relationship"
+        },
+        {
+            "number": 18,
+            "type": "mcq",
+            "question": "When implementing Public-Key Encryption for ensuring the authenticity and nonrepudiation of data, the private key is used to perform what specific action?",
+            "answer_options": [
+                "(A) Verify the signature",
+                "(B) Store the data",
+                "(C) Sign (encrypt) the data",
+                "(D) Retrieve the public key",
+                "(E) Don't Know"
+            ],
+            "ground_truth_answer": "(C)",
+            "correct_node_id": "10da1f98-e19e-4144-b51a-8378d8fe7d59",
+            "ground_truth_context": "Page 1209\nC \nH A P T E R  25\nAdvanced Application\nDevelopment\nThere are a number of tasks in application development. We\nsaw in Chapter 6 to Chapter 9 how to design and build an\napplication. One of the aspects of application design is the\nperformance one expects out of the application. In fact, it is\ncommon to ﬁnd that once an application has been built, it\nruns slower than the designers wanted or handles fewer\ntransactions per second than they required. An application\nthat takes an excessive amount of time to perform\nrequested actions can cause user dissatisfaction at best and\nbe completely unusable at worst.\nApplications can be made to run signiﬁcantly faster by\nperformance tuning, which consists of ﬁnding and\neliminating bottlenecks and adding appropriate hardware\nsuch as memory or disks. There are many things an\napplication developer can do to tune the application, and"
+        },
+        {
+            "number": 19,
+            "type": "mcq",
+            "question": "The data modeling abstraction that permits the specification of data where individual data items of the same type may have different sets of attributes (e.g., JSON or XML structures) is called the:",
+            "answer_options": [
+                "(A) Relational Data Model",
+                "(B) Entity-Relationship Model",
+                "(C) Object-Relational Model",
+                "(D) Semi-structured Data Model",
+                "(E) Don't Know"
+            ],
+            "ground_truth_answer": "(D)",
+            "correct_node_id": "cbe29ff5-6536-4085-b848-54089b979efd",
+            "ground_truth_context": "Page 907\nC \nH \nA \nP T E R  19\nRecovery System\nA computer system, like any other device, is subject to\nfailure from a variety of causes: disk crash, power outage,\nsoftware error, a ﬁre in the machine room, even sabotage.\nIn any failure, information may be lost. Therefore, the\ndatabase system must take actions in advance to ensure\nthat the atomicity and durability properties of transactions,\nintroduced in Chapter 17, are preserved. An integral part of\na database system is a recovery scheme that can restore\nthe database to the consistent state that existed before the\nfailure.\nThe recovery scheme must also support high\navailability, that is, the database should be usable for a\nvery high percentage of time. To support high availability in\nthe face of machine failure (as also planned machine\nshutdowns for hardware/software upgrades and\nmaintenance), the recovery scheme must support the ability\nto keep a backup copy of the database synchronized with"
+        },
+        {
+            "number": 20,
+            "type": "mcq",
+            "question": "The process of breaking up large unstructured text documents into smaller, meaningful units suitable for vector embedding and retrieval (a technique known as Chunking) is part of the implementation details for which specialized application area?",
+            "answer_options": [
+                "(A) BCNF Decomposition",
+                "(B) Query Optimization",
+                "(C) Transaction Management",
+                "(D) Information Retrieval (Textual Data)",
+                "(E) Don't Know"
+            ],
+            "ground_truth_answer": "(E)",
+            "correct_node_id": "3271cb70-631d-49c3-a53e-f83b8aa16a3e",
+            "ground_truth_context": "Page 286\nFigure 6.26 Symbols used in the E-R notation.\n6.10.1 Alternative E-R Notations\nFigure 6.27 indicates some of the alternative E-R notations\nthat are widely used. One alternative representation of\nattributes of entities is to show them in ovals connected to\nthe box representing the entity; primary key\nattributes are indicated by underlining them. The\nabove notation is shown at the top of the ﬁgure. Relationship"
+        }
+    ],
+    "essay": [
+        {
+            "number": 1,
+            "type": "essay",
+            "question": "Transaction Concept: What is the all-or-none requirement of a transaction, and which ACID property ensures this?",
+            "answer_options": [],
+            "ground_truth_answer": "The all-or-none requirement means that the funds transfer (or any sequence of operations) must happen in its entirety or not at all. This requirement is called Atomicity,.",
+            "correct_node_id": "82bfb53d-b1cc-4488-a966-885f030297bc",
+            "ground_truth_context": "Page 803\nThus, because of the failure, the state of the system\nno longer reﬂects a real state of the world that the\ndatabase is supposed to capture. We term such a state\nan inconsistent state. We must ensure that such\ninconsistencies are not visible in a database system.\nNote, however, that the system must at some point be\nin an inconsistent state. Even if transaction Ti is\nexecuted to completion, there exists a point at which\nthe value of account A is $950 and the value of account\nB is $2000, which is clearly an inconsistent state. This\nstate, however, is eventually replaced by the consistent\nstate where the value of account A is $950, and the\nvalue of account B is $2050. Thus, if the transaction\nnever started or was guaranteed to complete, such an\ninconsistent state would not be visible except during the\nexecution of the transaction. That is the reason for the\natomicity requirement: If the atomicity property is\npresent, all actions of the transaction are reﬂected in\nthe database, or none are.\nThe basic idea behind ensuring atomicity is\nthis: The database system keeps track (on disk)\nof the old values of any data on which a transaction\nperforms a write. This information is written to a ﬁle\ncalled the log. If the transaction does not complete its\nexecution, the database system restores the old values\nfrom the log to make it appear as though the\ntransaction never executed. We discuss these ideas\nfurther in Section 17.4. Ensuring atomicity is the\nresponsibility of the database system; speciﬁcally, it is\nhandled by a component of the database called the\nrecovery system, which we describe in detail in\nChapter 19.\nDurability: Once the execution of the transaction\ncompletes successfully, and the user who initiated the\ntransaction has been notiﬁed that the transfer of funds"
+        },
+        {
+            "number": 2,
+            "type": "essay",
+            "question": "SQL DDL: What is the output generated by the processing of DDL statements, and what kind of information does this output contain?",
+            "answer_options": [],
+            "ground_truth_answer": "The output of the DDL is placed in the data dictionary. The data dictionary contains metadata—that is, data about data.",
+            "correct_node_id": "3b4cefae-a05a-4a85-a4a6-f94f86bfd646",
+            "ground_truth_context": "Page 15\noutput of the DDL is placed in the data dictionary, which\ncontains metadata — that is, data about data. The data\ndictionary is considered to be a special type of table that\ncan be accessed and updated only by the database system\nitself (not a regular user). The database system consults the\ndata dictionary before reading or modifying actual data.\n1.4.2 The SQL Data-Deﬁnition Language\nSQL provides a rich DDL that allows one to deﬁne tables\nwith data types and integrity constraints.\nFor instance, the following SQL DDL statement deﬁnes the\ndepartment table:\ncreate table department\n(dept_name char (20),\nbuilding char (15),\nbudget numeric (12,2));\nExecution of the preceding DDL statement creates the\ndepartment table with three columns: dept_name, building,\nand budget, each of which has a speciﬁc data type\nassociated with it. We discuss data types in more detail in\nChapter 3.\nThe SQL DDL also supports a number of types of integrity\nconstraints. For example, one can specify that the\ndept_name attribute value is a primary key, ensuring that\nno two departments can have the same department\nname. As another example, one can specify that the\ndept_name attribute value appearing in any instructor\nrecord must also appear in the dept_name attribute of some\nrecord of the department table. We discuss SQL support for\nintegrity constraints and authorizations in Chapter 3 and\nChapter 4.\n1.4.3 Data-Manipulation Language"
+        },
+        {
+            "number": 3,
+            "type": "essay",
+            "question": "E-R Modeling: When defining a weak entity set in an E-R diagram, what graphical notation is used for the entity set itself, and for the relationship set connecting it to the identifying strong entity set?",
+            "answer_options": [],
+            "ground_truth_answer": "A weak entity set is depicted via a double rectangle. The relationship set connecting the weak entity set to the identifying strong entity set is depicted by a double diamond.",
+            "correct_node_id": "a3eecf74-6a2d-4f75-a6d8-59369913cafa",
+            "ground_truth_context": "The provided texts extensively detail the concept of **Weak Entity Sets** within the Entity-Relationship (E-R) modeling framework, contrasting them with **Strong Entity Sets**.\n\n**Key Characteristics of Weak Entity Sets:**\n\n1.  **Existence Dependence:** A weak entity set's existence is dependent on another entity set, known as its **identifying entity set** (or strong entity set). This dependency is formalized by the weak entity set having **total participation** in the relationship connecting it to the identifying entity set.\n2.  **Identification:** A weak entity cannot be uniquely identified by its own attributes alone. Its primary key is formed by the **union of the primary key of the identifying entity set and its own discriminator attributes**.\n3.  **Identifying Relationship:** The relationship connecting the weak entity to its identifying entity is called the **identifying relationship**. This relationship is always **many-to-one** from the weak entity set to the identifying entity set, and the weak"
+        },
+        {
+            "number": 4,
+            "type": "essay",
+            "question": "Relational Algebra: What is the necessary condition regarding the schemas of two relations for them to be compatible for fundamental set operations like Union (∪) or Set Difference (−, or except)?",
+            "answer_options": [],
+            "ground_truth_answer": "For set operations to be valid, the relations must be compatible. This means they must have the same number of attributes (the arity must be the same), and the types of the corresponding attributes must be the same.",
+            "correct_node_id": "c68410cb-1c8f-4c2c-bb78-379b5e61660e",
+            "ground_truth_context": "This collection of texts details fundamental set operations in relational algebra and their corresponding implementations in SQL, focusing on **Union ($\\cup$)**, **Intersection ($\\cap$)**, and **Set Difference (Except, $-$)**.\n\n**Compatibility Requirement:** For set operations like union, intersection, and difference to be valid between two relations, they must be **compatible**. Compatibility requires that both input relations have the **same number of attributes (arity)**, and the **types of corresponding attributes must be identical**.\n\n**Set Operations:**\n\n1.  **Union ($\\cup$):** Finds tuples present in either or both input relations. In relational algebra, the expression $r \\cup s$ combines tuples. In SQL, this is achieved using the `UNION` keyword. Standard set operations **automatically eliminate duplicates** from the result. To retain all duplicates, SQL offers `UNION ALL`.\n2.  **Intersection ($\\cap$):** Finds tuples present in *both* input relations ($r \\cap s"
+        },
+        {
+            "number": 5,
+            "type": "essay",
+            "question": "SQL Views: What is the key distinction between a View (created using create view) and a temporary relation defined using the with clause?",
+            "answer_options": [],
+            "ground_truth_answer": "A view, once created, remains available until explicitly dropped,. The temporary relation defined by the with clause is local to the query in which it is defined, meaning its definition is available only to that single query,.",
+            "correct_node_id": "eb3b9f4f-728a-4adb-bcfa-00ea4a840f48",
+            "ground_truth_context": "SQL allows the definition of **virtual relations** called **views** using the `create view` command, which stores the defining query expression rather than precomputing and storing the results. This contrasts with storing query results directly, which can quickly become outdated if the underlying base relations change. Views are persistent, remaining available until explicitly dropped, unlike temporary named subqueries defined with the `with` clause.\n\nA view is defined using the syntax `create view v as <query expression>;`. Views can be used anywhere a relation name is used in subsequent queries, and attribute names can be explicitly specified if the query expression involves aggregates. Views can also be layered, meaning one view can be defined based on another existing view.\n\nThe primary benefit of this implementation is that the view is **recomputed on demand** whenever it is accessed, ensuring its data reflects the current state of the base relations.\n\nViews can also be used for security by granting users access to a view that omits sensitive information (e"
+        },
+        {
+            "number": 6,
+            "type": "essay",
+            "question": "Database Design Goals: Explain the two undesirable properties of a relational database design—Unnecessary Repetition of Information and Inability to Represent Information—and how normalization (specifically BCNF) addresses them.",
+            "answer_options": [],
+            "ground_truth_answer": "Boyce-Codd Normal Form (BCNF) aims to improve database design by eliminating redundancy based on functional dependencies. The primary issues BCNF addresses are the unnecessary repetition of information and the inability to represent information. Repetition, as seen when department details are duplicated for every instructor, wastes storage and leads to Update Anomalies, where inconsistencies arise if a fact (like a department's budget) is updated in some but not all rows. The second issue occurs when information about one entity (like a department) cannot be recorded unless a related entity (like an instructor) exists, forcing the data to rely on filler fields. BCNF resolves these problems through decomposition, breaking the problematic schema into smaller, separate schemas (e.g., instructor and department), which ensures department-specific facts are stored exactly once, thereby eliminating repetition and resolving update anomalies.",
+            "correct_node_id": "306622aa-15a9-4e20-995a-e49b43400f79",
+            "ground_truth_context": "Page 333\nmay “overnormalize, ” that is, decompose a relation\nunnecessarily.\nAs a longer example of the use of the BCNF decomposition\nalgorithm, suppose we have a database design using the\nclass relation, whose schema is as shown below:\nclass (course_id, title, dept_name, credits,\nsec_id, semester, year, building, room_number,\ncapacity, time_slot-id)\nThe set of functional dependencies that we need to hold\non this schema are:\ncourse_id title, dept_name, credits\nbuilding, room_number → capacity\ncourse_id, sec_id, semester, year→ building, room_number,\ntime_slot_id\nA candidate key for this schema is {course_id, sec_id,\nsemester, year}.\nWe can apply the algorithm of Figure 7.11 to the class\nexample as follows:\nThe functional dependency:\ncourse_id title, dept_name, credits\nholds, but course_id is not a superkey. Thus, class is not\nin BCNF. We replace class with two relations with the\nfollowing schemas:\ncourse (course_id, title, dept_name, credits)\nclass-1 (course_id, sec_id, semester, year,\nbuilding, room_number-capacity, time_slot-\nid)\nThe only nontrivial functional dependencies\nthat hold on course include course_id on the left\nside of the arrow. Since course_id is a superkey for\ncourse, course is in BCNF."
+        },
+        {
+            "number": 7,
+            "type": "essay",
+            "question": "SQL Query Execution and Relational Algebra: Explain the sequence of operations defined by the multiset relational algebra for a basic SQL query involving the from, where, and select clauses, and clarify why the SQL select clause is considered an \"unfortunate historical fact.\"",
+            "answer_options": [],
+            "ground_truth_answer": "A basic SQL query is formally represented by the multiset relational-algebra expression $\\Pi_{A_1, A_2, \\dots, A_n}(\\sigma_P(r_1 \\times r_2 \\times \\cdots \\times r_m))$ and is executed in a specific order: first, the Cartesian Product ($\\times$) corresponding to the FROM clause is evaluated, combining every tuple from the input relations; second, the Select ($\\sigma$) operation, corresponding to the WHERE clause predicate ($P$), filters the result, retaining only the satisfying rows; and third, the Project ($\\Pi$) operation extracts the attributes listed in the SELECT clause.  This sequence reveals an \"unfortunate historical fact\" in SQL terminology, as the SQL SELECT clause, which chooses columns, performs the relational algebra Project ($\\Pi$) operation, while the SQL WHERE clause, which chooses rows, performs the relational algebra Select ($\\sigma$) operation.",
+            "correct_node_id": "3e47031a-2436-4b4a-b1e3-7833762bf4cc",
+            "ground_truth_context": "operations in the multiset relational algebra are deﬁned as\nfollows:\n1. If there are c1 copies of tuple t1 in r1, and t1 satisﬁes\nselection σθ, then there are c1 copies of t1 in σθ(r1).\n2. For each copy of tuple t1 in r1, there is a copy of tuple\nIIA(t1) in IIA(r1), where IIA(t1) denotes the projection of the\nsingle tuple t1.\n3. If there are c1 copies of tuple t1 in r1 and c2 copies of tuple\nt2 in r2, there are c1 * c2 copies of the tuple t1. t2 in r1 x r2.\nFor example, suppose that relations r1 with schema (A, B)\nand r2 with schema (C) are the following multisets: r1 = {(1, a),\n(2, a)} and r2 = {(2), (3), (3)}. Then IIB(r1) would be {(a), (a)},\nwhereas IIB(r1) x r2 would be:\n{(a, 2), (a, 2), (a, 3), (a, 3), (a, 3), (a, 3)}\nNow consider a basic SQL query of the form:\nselect A1, A2,..., An\nfrom r1, r2,..., rm\nwhere P\nEach Ai represents an attribute, and each ri a relation. P is a\npredicate. If the where clause is omitted, the predicate P is\ntrue. The query is equivalent to the multiset relational-algebra\nexpression:\nThe relational algebra select operation corresponds to the\nSQL where clause, not to the SQL select clause; the\ndiﬀerence in meaning is an unfortunate historical fact. We\ndiscuss the representation of more complex SQL queries in\nNote 3.2 on page 97.\nThe relational-algebra representation of SQL queries helps to\nformally deﬁne the meaning of the SQL program. Further,\ndatabase systems typically translate SQL queries into a lower-"
+        },
+        {
+            "number": 8,
+            "type": "essay",
+            "question": "Data Modeling: Contrast the concepts of Multivalued Attributes and Composite Attributes in the E-R model and describe how each is handled when transforming the E-R schema into relation schemas.",
+            "answer_options": [],
+            "ground_truth_answer": "Both Multivalued and Composite attributes are non-simple features that add complexity to an E-R schema, but they are mapped to the relational model differently. A Multivalued attribute (e.g., phone_number) can hold a set of values for a single entity, and it is handled by creating a separate relation schema that includes the multivalued attribute itself and the primary key of the entity set it belongs to. Conversely, a Composite attribute (e.g., address) can be divided into smaller subparts (like street, city, and postal_code), and it is mapped by creating a separate attribute for each of its component parts within the original relation schema, with no attribute created for the composite attribute itself.",
+            "correct_node_id": "c3813639-d0ce-4301-9365-6b6e7cf19694",
+            "ground_truth_context": "Page 251\nﬁrst_name, middle_initial, and last_name. Using\ncomposite attributes in a design schema is a good\nchoice if a user will wish to refer to an entire attribute on\nsome occasions, and to only a component of the\nattribute on other occasions. Suppose we were to add an\naddress to the student entity-set. The address can be\ndeﬁned as the composite attribute address with the\nattributes street, city, state, and postal_code.1\nComposite attributes help us to group together related\nattributes, making the modeling cleaner.\nNote also that a composite attribute may appear as a\nhierarchy. In the composite attribute address, its\ncomponent attribute street can be further divided into\nstreet_number, street_name, and apartment_number.\nFigure 6.7 depicts these examples of composite\nattributes for the instructor entity set.\nSingle-valued and multivalued attributes. The\nattributes in our examples all have a single value for a\nparticular entity. For instance, the student_ID attribute\nfor a speciﬁc student entity refers to only one student ID.\nSuch attributes are said to be single valued. There may\nbe instances where an attribute has a set of values for a\nspeciﬁc entity. Suppose we add to the instructor entity\nset a phone_number attribute. An instructor may have\nzero, one, or several phone numbers, and diﬀerent\ninstructors may have diﬀerent numbers of phones. This\ntype of attribute is said to be multivalued. As another\nexample, we could add to the instructor entity set an\nattribute dependent_name listing all the dependents.\nThis attribute would be multivalued, since any particular\ninstructor may have zero, one, or more dependents.\nDerived attributes. The value for this type of attribute\ncan be derived from the values of other related\nattributes or entities. For instance, let us say that the\ninstructor entity set has an attribute students_advised,"
+        },
+        {
+            "number": 9,
+            "type": "essay",
+            "question": "SQL Features: Explain the functionality and benefit of the with clause and the as clause in SQL queries, particularly in relation to improving query readability and reuse.",
+            "answer_options": [],
+            "ground_truth_answer": "Both the WITH clause (Common Table Expression, CTE) and the AS clause (Alias) are key SQL features that enhance query readability and reuse. The WITH clause defines a named, temporary relation using a subquery, primarily benefiting complex queries by making their logic clearer and allowing the temporary result to be referenced multiple times within the same overall query (e.g., for calculating statistics like departments with maximum budgets); this definition is strictly limited to the execution scope of that single query. The AS clause, conversely, is used to rename an attribute or a relation (creating a correlation name or table alias) , which is essential for differentiating attributes when performing a self-join (a Cartesian product of a relation with itself, like comparing T.salary vs. S.salary) and for providing meaningful names to attributes generated by aggregation functions.",
+            "correct_node_id": "8e32a1e3-11c3-44d4-84bd-8291180d756a",
+            "ground_truth_context": "Page 81\nlevel representation based on relational algebra, and they\nperform query optimization and query evaluation using this\nrepresentation.\nold-name as new-name\nThe as clause can appear in both the select and from\nclauses.3\nFor example, if we want the attribute name name to be\nreplaced with the name instructor_name, we can rewrite the\npreceding query as:\nselect name as instructor_name, course_id\nfrom instructor, teaches\nwhere instructor.ID= teaches.ID;\nThe as clause is particularly useful in renaming relations. One\nreason to rename a relation is to replace a long relation name\nwith a shortened version that is more convenient to use\nelsewhere in the query. To illustrate, we rewrite the query “For all\ninstructors in the university who have taught some course, ﬁnd\ntheir names and the course ID of all courses they taught. ”\nselect T.name, S.course_id\nfrom instructor as T, teaches as S\nwhere T.ID= S.ID;\nAnother reason to rename a relation is a case where we wish to\ncompare tuples in the same relation. We then need to take the\nCartesian product of a relation with itself and, without renaming,\nit becomes impossible to distinguish one tuple from the other.\nSuppose that we want to write the query “Find the names of all\ninstructors whose salary is greater than at least one instructor in\nthe Biology department. ” We can write the SQL expression:\nselect distinct T.name\nfrom instructor as T, instructor as S\nwhere T.salary > S.salary and S.dept_name =\n'Biology';\nObserve that we could not use the notation instructor.salary,\nsince it would not be clear which reference to instructor is"
+        },
+        {
+            "number": 10,
+            "type": "essay",
+            "question": "Database Authorization and Security: Describe the four primary types of Authorization privileges in SQL (Read, Insert, Update, Delete) and explain how Public-Key Encryption can be used to ensure the authenticity and nonrepudiation of data via Digital Signatures (External Concept: Cryptography is implied in the source, but the answer adheres strictly to the description of the process).",
+            "answer_options": [],
+            "ground_truth_answer": "The security framework in databases involves both internal access controls and external cryptographic mechanisms. Authorization Privileges in SQL, managed via Data Definition Language (DDL) commands like GRANT and REVOKE, define four primary access types: Read (allows viewing data), Insert (allows adding new data), Update (allows modifying existing data), and Delete (allows removing data). Beyond access control, Public-Key Encryption is utilized for Digital Signatures to ensure data authenticity and nonrepudiation. In this process, the sender uses their secret private key to \"sign\" (encrypt) the data, and anyone can then use the corresponding public key to verify the signature. Successful decryption confirms the data was created by the sole possessor of the private key, thus establishing authenticity and providing nonrepudiation—meaning the creator cannot legitimately deny having produced the data.",
+            "correct_node_id": "1fb04b04-a362-49e9-88c9-6cfe525044c9",
+            "ground_truth_context": "Database authorization in SQL involves granting and revoking specific privileges on relations (tables) or views. The fundamental privileges include **SELECT** (to read data), **INSERT** (to add tuples), **UPDATE** (to modify data), and **DELETE** (to remove tuples). The **ALL PRIVILEGES** option serves as a shorthand for all allowable privileges. A user who creates a new relation automatically receives all privileges on it.\n\nThe **GRANT** statement is used to confer authorization, specifying the privilege list, the target relation/view, and the recipient user or role (e.g., `GRANT select ON department TO Amit, Satoshi;`). Update authorization can be restricted to specific attributes (e.g., `UPDATE (budget)`). Insert authorization can also specify attributes, dictating which fields must be provided during insertion. The special user name **public** refers to all current and future users.\n\nConversely, the **REVOKE** statement is used to withdraw previously granted authorizations,"
+        }
+    ]
+}
