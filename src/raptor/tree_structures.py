@@ -147,6 +147,10 @@ class RaptorTree:
     num_layers: int = 0
     layer_to_nodes: dict[int, list[Node]] = field(default_factory=dict)
 
+    # Models for query relevance checking (Global UMAP + GMM)
+    umap_model: Any = None
+    gmm_model: Any = None
+
     @property
     def total_nodes(self) -> int:
         """Get total number of nodes in the tree."""

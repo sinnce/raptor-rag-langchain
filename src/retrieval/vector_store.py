@@ -7,6 +7,7 @@ This module handles VectorStore operations including:
 """
 
 import logging
+import pickle
 from pathlib import Path
 from typing import Any, Literal, cast
 
@@ -231,14 +232,52 @@ class RaptorVectorStore:
             search_kwargs=search_kwargs,
         )
 
+    def save_models(self, path: Path, umap_model: Any, gmm_model: Any) -> None:
+        """Save UMAP and GMM models to disk.
+
+        Args:
+            path: Directory to save models to.
+            umap_model: UMAP model.
+            gmm_model: GMM model.
+        """
+        if umap_model is not None and gmm_model is not None:
+            with open(path / "raptor_models.pkl", "wb") as f:
+                pickle.dump({"umap": umap_model, "gmm": gmm_model}, f)
+            logger.info(f"Saved RAPTOR models to {path / 'raptor_models.pkl'}")
+
+    def load_models(self, path: Path) -> tuple[Any, Any]:
+        """Load UMAP and GMM models from disk.
+
+        Args:
+            path: Directory to load models from.
+
+        Returns:
+            Tuple of (umap_model, gmm_model) or (None, None).
+        """
+        model_path = path / "raptor_models.pkl"
+        if model_path.exists():
+            try:
+                with open(model_path, "rb") as f:
+                    data = pickle.load(f)
+                logger.info(f"Loaded RAPTOR models from {model_path}")
+                return data["umap"], data["gmm"]
+            except Exception as e:
+                logger.error(f"Failed to load RAPTOR models: {e}")
+                return None, None
+        return None, None
+
     def save(
         self,
         path: str | Path | None = None,
+        umap_model: Any = None,
+        gmm_model: Any = None,
     ) -> None:
         """Save the vector store to disk.
 
         Args:
             path: Path to save to. Defaults to persist_directory.
+            umap_model: Optional UMAP model to save.
+            gmm_model: Optional GMM model to save.
         """
         if self._vector_store is None:
             raise ValueError("No vector store to save")
@@ -252,6 +291,10 @@ class RaptorVectorStore:
         elif self.store_type == "chroma":
             # Chroma persists automatically
             logger.info(f"Chroma index persisted to {save_path}")
+
+        # Save models if provided
+        if umap_model and gmm_model:
+            self.save_models(save_path, umap_model, gmm_model)
 
     def load(
         self,
@@ -299,4 +342,7 @@ class RaptorVectorStore:
         """
         store = cls(**kwargs)
         store.add_tree(tree)
+        # If the tree has models, we should probably persist them immediately if path is set
+        if tree.umap_model and tree.gmm_model and store.persist_directory:
+             store.save_models(store.persist_directory, tree.umap_model, tree.gmm_model)
         return store
