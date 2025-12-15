@@ -31,7 +31,7 @@ def global_cluster_embeddings(
     dim: int,
     n_neighbors: int | None = None,
     metric: str = "cosine",
-) -> np.ndarray:
+) -> tuple[np.ndarray, umap.UMAP]:
     """Reduce embeddings dimensionality globally using UMAP.
 
     Args:
@@ -41,7 +41,7 @@ def global_cluster_embeddings(
         metric: Distance metric for UMAP.
 
     Returns:
-        Reduced embedding array.
+        Tuple of (Reduced embedding array, UMAP reducer object).
     """
     if n_neighbors is None:
         n_neighbors = int((len(embeddings) - 1) ** 0.5)
@@ -53,7 +53,7 @@ def global_cluster_embeddings(
         random_state=RANDOM_SEED,
     )
     reduced_embeddings = reducer.fit_transform(embeddings)
-    return reduced_embeddings
+    return reduced_embeddings, reducer
 
 
 def local_cluster_embeddings(
@@ -118,7 +118,7 @@ def gmm_cluster(
     embeddings: np.ndarray,
     threshold: float,
     random_state: int = RANDOM_SEED,
-) -> tuple[list[np.ndarray], int]:
+) -> tuple[list[np.ndarray], int, GaussianMixture]:
     """Perform GMM clustering with soft assignment.
 
     Uses Gaussian Mixture Model for soft clustering where
@@ -131,7 +131,7 @@ def gmm_cluster(
         random_state: Random seed for reproducibility.
 
     Returns:
-        Tuple of (cluster labels per point, number of clusters).
+        Tuple of (cluster labels per point, number of clusters, GMM model).
     """
     n_clusters = get_optimal_clusters(embeddings)
     gm = GaussianMixture(n_components=n_clusters, random_state=random_state)
@@ -140,7 +140,7 @@ def gmm_cluster(
     probs = gm.predict_proba(embeddings)
     labels = [np.where(prob > threshold)[0] for prob in probs]
 
-    return labels, n_clusters
+    return labels, n_clusters, gm
 
 
 def perform_clustering(
@@ -148,7 +148,8 @@ def perform_clustering(
     dim: int,
     threshold: float,
     verbose: bool = False,
-) -> list[np.ndarray]:
+    return_models: bool = False,
+) -> list[np.ndarray] | tuple[list[np.ndarray], Any, Any]:
     """Perform hierarchical clustering with UMAP + GMM.
 
     This is the main clustering function that:
@@ -161,20 +162,28 @@ def perform_clustering(
         dim: Target dimensionality for UMAP reduction.
         threshold: Probability threshold for GMM assignment.
         verbose: Enable verbose logging.
+        return_models: Whether to return the global UMAP and GMM models.
 
     Returns:
         List of cluster assignments for each embedding.
+        If return_models is True, returns (clusters, global_umap, global_gmm).
     """
     # Handle edge cases
     if len(embeddings) <= dim + 1:
         # Not enough samples for UMAP reduction
+        if return_models:
+            return [np.array([0]) for _ in range(len(embeddings))], None, None
         return [np.array([0]) for _ in range(len(embeddings))]
 
     # Global dimensionality reduction
-    reduced_embeddings_global = global_cluster_embeddings(embeddings, min(dim, len(embeddings) - 2))
+    reduced_embeddings_global, global_umap_model = global_cluster_embeddings(
+        embeddings, min(dim, len(embeddings) - 2)
+    )
 
     # Global clustering
-    global_clusters, n_global_clusters = gmm_cluster(reduced_embeddings_global, threshold)
+    global_clusters, n_global_clusters, global_gmm_model = gmm_cluster(
+        reduced_embeddings_global, threshold
+    )
 
     if verbose:
         logger.info(f"Global Clusters: {n_global_clusters}")
@@ -200,7 +209,7 @@ def perform_clustering(
             n_local_clusters = 1
         else:
             reduced_embeddings_local = local_cluster_embeddings(global_cluster_embeddings_, dim)
-            local_clusters, n_local_clusters = gmm_cluster(reduced_embeddings_local, threshold)
+            local_clusters, n_local_clusters, _ = gmm_cluster(reduced_embeddings_local, threshold)
 
         if verbose:
             logger.info(f"Local Clusters in Global Cluster {i}: {n_local_clusters}")
@@ -220,6 +229,8 @@ def perform_clustering(
     if verbose:
         logger.info(f"Total Clusters: {total_clusters}")
 
+    if return_models:
+        return all_local_clusters, global_umap_model, global_gmm_model
     return all_local_clusters
 
 
@@ -304,6 +315,40 @@ class RaptorClustering(ClusteringAlgorithm):
                 cluster_to_indices[cid].append(idx)
 
         return list(cluster_to_indices.values())
+
+    def perform_clustering_with_models(
+        self,
+        embeddings: np.ndarray,
+        **_kwargs: Any,
+    ) -> tuple[list[list[int]], Any, Any]:
+        """Perform clustering and return models.
+
+        Args:
+            embeddings: Array of embedding vectors.
+            **_kwargs: Additional parameters.
+
+        Returns:
+            Tuple of (clusters, umap_model, gmm_model).
+        """
+        clusters, umap_model, gmm_model = perform_clustering(
+            embeddings,
+            dim=self.reduction_dimension,
+            threshold=self.threshold,
+            verbose=self.verbose,
+            return_models=True,
+        )
+
+        # Convert from per-embedding clusters to per-cluster indices
+        cluster_to_indices: dict[int, list[int]] = {}
+
+        for idx, cluster_assignments in enumerate(clusters):
+            for cluster_id in cluster_assignments:
+                cid = int(cluster_id)
+                if cid not in cluster_to_indices:
+                    cluster_to_indices[cid] = []
+                cluster_to_indices[cid].append(idx)
+
+        return list(cluster_to_indices.values()), umap_model, gmm_model
 
     def cluster_nodes(
         self,
